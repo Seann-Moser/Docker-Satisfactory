@@ -1,0 +1,10 @@
+version: '3'
+services:
+  api:
+    image: seannmoser/docker-statisfactory:v0.6.0
+    ports:
+      - "15777:15777"
+      - "15000:15000"
+      - "7777:7777"
+    volumes:
+      - ./data:/usr/games/SatisfactoryDedicatedServer/.config/Epic/FactoryGame/Saved/SaveGames/
