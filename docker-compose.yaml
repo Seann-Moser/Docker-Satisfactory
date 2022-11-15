@@ -7,4 +7,4 @@ services:
       - "15000:15000"
       - "7777:7777"
     volumes:
-      - ./data:/usr/games/SatisfactoryDedicatedServer/.config/Epic/FactoryGame/Saved/SaveGames/
+      - ./data:/home/steam/SatisfactoryDedicatedServer/FactoryGame/Saved/SaveGames
