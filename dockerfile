@@ -32,21 +32,20 @@ RUN /bin/bash "${STEAM_DIR}steamcmd.sh" +force_install_dir "${STEAM_DIR}Satisfac
     validate +quit
 RUN mkdir -p ~/.steam/sdk64/
 RUN mkdir -p ~/.steam/sdk32/
-#RUN cp linux64/steamclient.so /lib/
 
-RUN cp linux64/steamclient.so /home/steam/.steam/sdk64/
-RUN cp linux32/steamclient.so /home/steam/.steam/sdk32/
-ENV LD_LIBRARY_PATH=~./steam/sdk32:$LD_LIBRARY_PATH
-#RUN ln -s "linux32/steamclient.so" "home/steam/.steam/sdk32/steamclient.so"
 # Experimental
 # RUN /bin/bash "${STEAM_DIR}steamcmd.sh" +force_install_dir "${STEAM_DIR}SatisfactoryDedicatedServer" \
 #     +login anonymous \
 #     +app_update 1690800 \
 #     -beta experimental \
 #     validate +quit
+
+RUN cp linux64/steamclient.so /home/steam/.steam/sdk64/
+RUN cp linux32/steamclient.so /home/steam/.steam/sdk32/
+ENV LD_LIBRARY_PATH=~./steam/sdk32:$LD_LIBRARY_PATH
+
 EXPOSE 15777
 EXPOSE 15000
 EXPOSE 7777
 
 ENTRYPOINT /bin/bash "${SATISFACTORY_DIR}FactoryServer.sh" -NOSTEAM
-# -Port="${PORT}"
