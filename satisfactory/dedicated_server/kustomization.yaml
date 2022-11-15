@@ -1,0 +1,8 @@
+# kustomization.yml
+namespace: satisfactory
+
+resources:
+  - ./namespace.yaml
+  - ./satisfactory.yaml
+  - ./service.yaml
+  - ./pv.yaml

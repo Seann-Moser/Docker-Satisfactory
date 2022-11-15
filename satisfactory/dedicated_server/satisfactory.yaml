@@ -1,0 +1,43 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: satisfactory-dedicated-server-env-configmap
+data:
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: satisfactory-dedicated-server
+  labels:
+    app: satisfactory-dedicated-server
+spec:
+  selector:
+    matchLabels:
+      app: satisfactory-dedicated-server
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: satisfactory-dedicated-server
+    spec:
+      containers:
+        - name: docker-satisfactory
+          image: seannmoser/docker-satisfactory:v0.6.0-rc1
+          envFrom:
+            - configMapRef:
+                name: satisfactory-dedicated-server-env-configmap
+          ports:
+            - name: query
+              containerPort: 15777 # Query Port 
+            - name: beacon
+              containerPort: 15000 # Beacon Port
+            - name: game
+              containerPort: 7777 # Game Port 
+          volumeMounts:
+            - mountPath: "/home/steam/SatisfactoryDedicatedServer/FactoryGame/Saved/SaveGames"
+              name: dedicated-server-storage
+      volumes:
+        - name: dedicated-server-storage
+          persistentVolumeClaim:
+            claimName: dedicated-server-storage-claim

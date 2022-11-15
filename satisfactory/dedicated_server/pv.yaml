@@ -1,0 +1,29 @@
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: dedicated-server-storage
+spec:
+  capacity:
+    storage: 20Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  volumeMode: Filesystem  
+  storageClassName: ssd
+  hostPath:
+    path: "/data/satisfactory/"
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: dedicated-server-storage-claim
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: ssd   
+  resources:
+    requests:
+      storage: 20Gi
+  volumeName: dedicated-server-storage
+---
