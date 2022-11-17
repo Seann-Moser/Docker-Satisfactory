@@ -24,12 +24,13 @@ RUN wget https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz 
   && tar xvf steamcmd_linux.tar.gz
 
 
-# Public Beta
+# Experimental
 RUN /bin/bash "${STEAM_DIR}steamcmd.sh" +force_install_dir "${STEAM_DIR}SatisfactoryDedicatedServer" \
     +login anonymous \
     +app_update 1690800 \
-    -beta public \
+    -beta experimental \
     validate +quit
+
 RUN mkdir -p ~/.steam/sdk64/
 RUN mkdir -p ~/.steam/sdk32/
 
