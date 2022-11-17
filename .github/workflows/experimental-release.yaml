@@ -5,8 +5,8 @@ name: Release Docker Version
 on:
   push:
     tags:
-      - "v[0-9]+.[0-9]+.[0-9]+.[0-9]+-exp"
-      - "v[0-9]+.[0-9]+.[0-9]+.[0-9]+-exp-rc[0-9]+"
+      - "v[0-9]+.[0-9]+.[0-9]+.[0-9]+-e"
+      - "v[0-9]+.[0-9]+.[0-9]+.[0-9]+-erc[0-9]+"
 
 jobs:
   build:
@@ -34,7 +34,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: .
-          file: ./dockerfile
+          file: ./dockerfile_exp
           push: true
           platforms: linux/amd64
           labels: ${{ steps.release.outputs.labels }}
