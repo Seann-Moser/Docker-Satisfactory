@@ -37,6 +37,6 @@ jobs:
           push: true
           platforms: linux/amd64
           labels: ${{ steps.release.outputs.labels }}
-          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/${{ steps.parse_repo_name.outputs.repo_name }}:${{ github.event.release.tag_name }}
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/${{ steps.parse_repo_name.outputs.repo_name }}:${{ github.ref_name }}
           cache-from: type=registry,ref=${{ secrets.DOCKER_HUB_USERNAME }}/${{ steps.parse_repo_name.outputs.repo_name }}:buildcache
           cache-to: type=registry,ref=${{ secrets.DOCKER_HUB_USERNAME }}/${{ steps.parse_repo_name.outputs.repo_name }}:buildcache,mode=max
